@@ -1,0 +1,2148 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20193.19.1017.1259                               -->
+<workbook original-version='18.1' source-build='2019.3.1 (20193.19.1017.1259)' source-platform='win' version='18.1' xml:base='https://public.tableau.com' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <SheetIdentifierTracking ignorable='true' predowngraded='true' />
+    <SortTagCleanup />
+    <WindowsPersistSimpleIdentifiers />
+    <WorksheetBackgroundTransparency />
+    <ZoneBackgroundTransparency />
+  </document-format-change-manifest>
+  <repository-location id='Wheretobuyrenthouse' path='/workbooks' revision='1.2' />
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource hasconnection='false' inline='true' name='Parameters' version='18.1'>
+      <aliases enabled='yes' />
+      <column caption='State Name' datatype='string' name='[Parameter 1]' param-domain-type='any' role='measure' type='nominal' value='&quot;Oregon&quot;'>
+        <calculation class='tableau' formula='&quot;Oregon&quot;' />
+      </column>
+      <column caption='Y Axis' datatype='string' name='[Parameter 2]' param-domain-type='list' role='measure' type='nominal' value='&quot;Buy House&quot;'>
+        <calculation class='tableau' formula='&quot;Buy House&quot;' />
+        <members>
+          <member value='&quot;Buy House&quot;' />
+          <member value='&quot;Rent House&quot;' />
+        </members>
+      </column>
+      <column caption='Color By' datatype='string' name='[Parameter 3]' param-domain-type='list' role='measure' type='nominal' value='&quot;Happiness Score&quot;'>
+        <calculation class='tableau' formula='&quot;Happiness Score&quot;' />
+        <members>
+          <member value='&quot;Happiness Score&quot;' />
+          <member value='&quot;(Pre)K - 12 Rank&quot;' />
+          <member value='&quot;Higher Education Rank&quot;' />
+        </members>
+      </column>
+    </datasource>
+    <datasource caption='Household income.csv+ (Multiple Connections)' inline='true' name='federated.0umq5td0bwl78a122imlu1o8ho9a' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='Household income' name='textscan.0irw44m17r58yg14jef61182azdy'>
+            <connection class='textscan' directory='C:/Users/mrajen972/Desktop/New folder (50)' filename='Household income.csv' password='' port='0' server='' workgroup-auth-mode='as-is' />
+          </named-connection>
+          <named-connection caption='Rental' name='excel-direct.1o1m7a11yg8z8318eqizn08cce7t'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='C:/Users/mrajen972/Desktop/New folder (50)/Rental.xlsx' interpretationMode='0' password='' server='' validate='no' workgroup-auth-mode='as-is' />
+          </named-connection>
+          <named-connection caption='happiness' name='textscan.1t05x3t1s9hpyl1gziz9617ql52q'>
+            <connection class='textscan' directory='C:/Users/mrajen972/Desktop/New folder (50)' filename='happiness.csv' password='' server='' workgroup-auth-mode='as-is' />
+          </named-connection>
+          <named-connection caption='Insurance' name='excel-direct.19ij9el14fo7nr1852ib50osa92a'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='C:/Users/mrajen972/Desktop/New folder (50)/Insurance.xlsx' interpretationMode='0' password='' server='' validate='no' workgroup-auth-mode='as-is' />
+          </named-connection>
+        </named-connections>
+        <relation join='inner' type='join'>
+          <clause type='join'>
+            <expression op='='>
+              <expression op='[Household income.csv].[State]' />
+              <expression op='[Sheet11].[State]' />
+            </expression>
+          </clause>
+          <relation join='inner' type='join'>
+            <clause type='join'>
+              <expression op='='>
+                <expression op='[Household income.csv].[State]' />
+                <expression op='[Education Ranking.csv].[State]' />
+              </expression>
+            </clause>
+            <relation join='inner' type='join'>
+              <clause type='join'>
+                <expression op='='>
+                  <expression op='[Household income.csv].[State]' />
+                  <expression op='[HOuse median price.csv].[State]' />
+                </expression>
+              </clause>
+              <relation join='inner' type='join'>
+                <clause type='join'>
+                  <expression op='='>
+                    <expression op='[Household income.csv].[State]' />
+                    <expression op='[happiness.csv].[State]' />
+                  </expression>
+                </clause>
+                <relation join='inner' type='join'>
+                  <clause type='join'>
+                    <expression op='='>
+                      <expression op='[Household income.csv].[State]' />
+                      <expression op='[Sheet1].[State]' />
+                    </expression>
+                  </clause>
+                  <relation connection='textscan.0irw44m17r58yg14jef61182azdy' name='Household income.csv' table='[Household income#csv]' type='table'>
+                    <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                      <column datatype='integer' name='rank' ordinal='0' />
+                      <column datatype='string' name='State' ordinal='1' />
+                      <column datatype='integer' name='Population' ordinal='2' />
+                      <column datatype='integer' name='HouseholdIncome' ordinal='3' />
+                    </columns>
+                  </relation>
+                  <relation connection='excel-direct.1o1m7a11yg8z8318eqizn08cce7t' name='Sheet1' table='[Sheet1$]' type='table'>
+                    <columns gridOrigin='A1:B51:no:A1:B51:0' header='yes' outcome='6'>
+                      <column datatype='string' name='State' ordinal='0' />
+                      <column datatype='integer' name='Rent' ordinal='1' />
+                    </columns>
+                  </relation>
+                </relation>
+                <relation connection='textscan.1t05x3t1s9hpyl1gziz9617ql52q' name='happiness.csv' table='[happiness#csv]' type='table'>
+                  <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                    <column datatype='integer' name='overall' ordinal='0' />
+                    <column datatype='string' name='State' ordinal='1' />
+                    <column datatype='real' name='totalScore' ordinal='2' />
+                    <column datatype='integer' name='emotAndPhysRank' ordinal='3' />
+                    <column datatype='integer' name='workEnvironRank' ordinal='4' />
+                    <column datatype='integer' name='communityAndEnvironRank' ordinal='5' />
+                  </columns>
+                </relation>
+              </relation>
+              <relation connection='textscan.1t05x3t1s9hpyl1gziz9617ql52q' name='HOuse median price.csv' table='[HOuse median price#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                  <column datatype='string' name='State' ordinal='0' />
+                  <column datatype='integer' name='Median House Price' ordinal='1' />
+                  <column datatype='real' name='Monthly Payment' ordinal='2' />
+                </columns>
+              </relation>
+            </relation>
+            <relation connection='textscan.1t05x3t1s9hpyl1gziz9617ql52q' name='Education Ranking.csv' table='[Education Ranking#csv]' type='table'>
+              <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                <column datatype='string' name='State' ordinal='0' />
+                <column datatype='integer' name='overallRank' ordinal='1' />
+                <column datatype='integer' name='higherEducationRank' ordinal='2' />
+                <column datatype='integer' name='prek12Rank' ordinal='3' />
+                <column datatype='integer' name='Pop' ordinal='4' />
+              </columns>
+            </relation>
+          </relation>
+          <relation connection='excel-direct.19ij9el14fo7nr1852ib50osa92a' name='Sheet11' table='[Sheet1$]' type='table'>
+            <columns gridOrigin='A1:B52:no:A1:B52:0' header='yes' outcome='6'>
+              <column datatype='string' name='State' ordinal='0' />
+              <column datatype='integer' name='Average Insurance' ordinal='1' />
+            </columns>
+          </relation>
+        </relation>
+        <cols>
+          <map key='[Average Insurance]' value='[Sheet11].[Average Insurance]' />
+          <map key='[HouseholdIncome]' value='[Household income.csv].[HouseholdIncome]' />
+          <map key='[Median House Price]' value='[HOuse median price.csv].[Median House Price]' />
+          <map key='[Monthly Payment]' value='[HOuse median price.csv].[Monthly Payment]' />
+          <map key='[Pop]' value='[Education Ranking.csv].[Pop]' />
+          <map key='[Population]' value='[Household income.csv].[Population]' />
+          <map key='[Rent]' value='[Sheet1].[Rent]' />
+          <map key='[State (Education Ranking.csv)]' value='[Education Ranking.csv].[State]' />
+          <map key='[State (HOuse median price.csv)]' value='[HOuse median price.csv].[State]' />
+          <map key='[State (Sheet1)]' value='[Sheet1].[State]' />
+          <map key='[State (Sheet11)]' value='[Sheet11].[State]' />
+          <map key='[State (happiness.csv)]' value='[happiness.csv].[State]' />
+          <map key='[State]' value='[Household income.csv].[State]' />
+          <map key='[communityAndEnvironRank]' value='[happiness.csv].[communityAndEnvironRank]' />
+          <map key='[emotAndPhysRank]' value='[happiness.csv].[emotAndPhysRank]' />
+          <map key='[higherEducationRank]' value='[Education Ranking.csv].[higherEducationRank]' />
+          <map key='[overallRank]' value='[Education Ranking.csv].[overallRank]' />
+          <map key='[overall]' value='[happiness.csv].[overall]' />
+          <map key='[prek12Rank]' value='[Education Ranking.csv].[prek12Rank]' />
+          <map key='[rank]' value='[Household income.csv].[rank]' />
+          <map key='[totalScore]' value='[happiness.csv].[totalScore]' />
+          <map key='[workEnvironRank]' value='[happiness.csv].[workEnvironRank]' />
+        </cols>
+        <refresh increment-key='' incremental-updates='false' />
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Household income.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>rank</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[rank]</local-name>
+            <parent-name>[Household income.csv]</parent-name>
+            <remote-alias>rank</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>State</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[State]</local-name>
+            <parent-name>[Household income.csv]</parent-name>
+            <remote-alias>State</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Population</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Population]</local-name>
+            <parent-name>[Household income.csv]</parent-name>
+            <remote-alias>Population</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HouseholdIncome</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[HouseholdIncome]</local-name>
+            <parent-name>[Household income.csv]</parent-name>
+            <remote-alias>HouseholdIncome</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>State</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[State (Sheet1)]</local-name>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias>State</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Rent</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Rent]</local-name>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias>Rent</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:B51:no:A1:B51:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>6</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[happiness.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>overall</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[overall]</local-name>
+            <parent-name>[happiness.csv]</parent-name>
+            <remote-alias>overall</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>State</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[State (happiness.csv)]</local-name>
+            <parent-name>[happiness.csv]</parent-name>
+            <remote-alias>State</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>totalScore</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[totalScore]</local-name>
+            <parent-name>[happiness.csv]</parent-name>
+            <remote-alias>totalScore</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>emotAndPhysRank</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[emotAndPhysRank]</local-name>
+            <parent-name>[happiness.csv]</parent-name>
+            <remote-alias>emotAndPhysRank</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>workEnvironRank</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[workEnvironRank]</local-name>
+            <parent-name>[happiness.csv]</parent-name>
+            <remote-alias>workEnvironRank</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>communityAndEnvironRank</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[communityAndEnvironRank]</local-name>
+            <parent-name>[happiness.csv]</parent-name>
+            <remote-alias>communityAndEnvironRank</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[HOuse median price.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>State</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[State (HOuse median price.csv)]</local-name>
+            <parent-name>[HOuse median price.csv]</parent-name>
+            <remote-alias>State</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Median House Price</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Median House Price]</local-name>
+            <parent-name>[HOuse median price.csv]</parent-name>
+            <remote-alias>Median House Price</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Monthly Payment</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Monthly Payment]</local-name>
+            <parent-name>[HOuse median price.csv]</parent-name>
+            <remote-alias>Monthly Payment</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Education Ranking.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>State</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[State (Education Ranking.csv)]</local-name>
+            <parent-name>[Education Ranking.csv]</parent-name>
+            <remote-alias>State</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>overallRank</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[overallRank]</local-name>
+            <parent-name>[Education Ranking.csv]</parent-name>
+            <remote-alias>overallRank</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>higherEducationRank</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[higherEducationRank]</local-name>
+            <parent-name>[Education Ranking.csv]</parent-name>
+            <remote-alias>higherEducationRank</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>prek12Rank</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[prek12Rank]</local-name>
+            <parent-name>[Education Ranking.csv]</parent-name>
+            <remote-alias>prek12Rank</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Pop</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Pop]</local-name>
+            <parent-name>[Education Ranking.csv]</parent-name>
+            <remote-alias>Pop</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>State</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[State (Sheet11)]</local-name>
+            <parent-name>[Sheet11]</parent-name>
+            <remote-alias>State</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RUS_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Average Insurance</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Average Insurance]</local-name>
+            <parent-name>[Sheet11]</parent-name>
+            <remote-alias>Average Insurance</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Sheet11]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:B52:no:A1:B52:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>6</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Monthly Income' datatype='real' name='[Calculation_1288029518144163840]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([HouseholdIncome]/12)' />
+      </column>
+      <column caption='Interest Paid per month' datatype='real' name='[Calculation_1288029518178967553]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='(([Median House Price]*(3.99/100))/12) + ([Average Insurance]/12)' />
+      </column>
+      <column caption='Monthly Mortgage Payment' datatype='real' name='[Calculation_1288029518181019650]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='[Monthly Payment]+([Average Insurance]/12)' />
+      </column>
+      <column caption='Color By' datatype='real' name='[Calculation_1288029518196752389]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='if [Parameters].[Parameter 3] = &apos;Happiness Score&apos; then [totalScore]&#13;&#10;ELSEIF [Parameters].[Parameter 3] = &apos;Higher Education Rank&apos; then abs([higherEducationRank]-52)&#13;&#10;else abs([prek12Rank]-52) end' />
+      </column>
+      <column caption='Monthly Mortgage / Rent Payment' datatype='real' name='[Calculation_1288029518199349254]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='if [Parameters].[Parameter 2] = &apos;Rent House&apos; then [Rent]&#13;&#10;else [Calculation_1288029518181019650] end' />
+      </column>
+      <column caption='Calculation1' datatype='string' name='[Calculation_1288029518202597383]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='&apos;Metrics Definition&apos;' />
+      </column>
+      <column caption='Average Household Income' datatype='integer' name='[HouseholdIncome]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Monthly Average Rent' datatype='integer' name='[Rent]' role='measure' type='quantitative' />
+      <column datatype='string' name='[State (Education Ranking.csv)]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+      <column datatype='string' name='[State (HOuse median price.csv)]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+      <column datatype='string' name='[State (Sheet1)]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+      <column datatype='string' name='[State (Sheet11)]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+      <column datatype='string' name='[State (happiness.csv)]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+      <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+      <column caption='Community And Environment' datatype='integer' name='[communityAndEnvironRank]' role='measure' type='quantitative' />
+      <column caption='Emotional and Physical Wellbeing' datatype='integer' name='[emotAndPhysRank]' role='measure' type='quantitative' />
+      <column caption='Higher Education Rank' datatype='integer' name='[higherEducationRank]' role='measure' type='quantitative' />
+      <column caption='Education Overall Rank' datatype='integer' name='[overallRank]' role='measure' type='quantitative' />
+      <column caption='Happiness Rank' datatype='integer' name='[overall]' role='measure' type='quantitative' />
+      <column caption='(Pre)K - 12 Rank' datatype='integer' name='[prek12Rank]' role='measure' type='quantitative' />
+      <column caption='Rank' datatype='integer' name='[rank]' role='measure' type='quantitative' />
+      <column caption='Happiness Score' datatype='real' name='[totalScore]' role='measure' type='quantitative' />
+      <column caption='Work Environment' datatype='integer' name='[workEnvironRank]' role='measure' type='quantitative' />
+      <group caption='Action (State)' hidden='true' name='[Action (State)]' name-style='unqualified' user:auto-column='sheet_link'>
+        <groupfilter function='crossjoin'>
+          <groupfilter function='level-members' level='[State]' />
+        </groupfilter>
+      </group>
+      <extract count='-1' enabled='true' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='C:/Users/mrajen972/Documents/My Tableau Repository/Datasources/Household income.csv+ (Multiple Connections).hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='03/02/2020 05:07:29 AM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <cols>
+            <map key='[Average Insurance]' value='[Extract].[Average Insurance]' />
+            <map key='[HouseholdIncome]' value='[Extract].[HouseholdIncome]' />
+            <map key='[Median House Price]' value='[Extract].[Median House Price]' />
+            <map key='[Monthly Payment]' value='[Extract].[Monthly Payment]' />
+            <map key='[Pop]' value='[Extract].[Pop]' />
+            <map key='[Population]' value='[Extract].[Population]' />
+            <map key='[Rent]' value='[Extract].[Rent]' />
+            <map key='[State (Education Ranking.csv)]' value='[Extract].[State]' />
+            <map key='[State (HOuse median price.csv)]' value='[Extract].[State1]' />
+            <map key='[State (Sheet1)]' value='[Extract].[State2]' />
+            <map key='[State (Sheet11)]' value='[Extract].[State3]' />
+            <map key='[State (happiness.csv)]' value='[Extract].[State4]' />
+            <map key='[State]' value='[Extract].[State5]' />
+            <map key='[communityAndEnvironRank]' value='[Extract].[communityAndEnvironRank]' />
+            <map key='[emotAndPhysRank]' value='[Extract].[emotAndPhysRank]' />
+            <map key='[higherEducationRank]' value='[Extract].[higherEducationRank]' />
+            <map key='[overallRank]' value='[Extract].[overallRank]' />
+            <map key='[overall]' value='[Extract].[overall]' />
+            <map key='[prek12Rank]' value='[Extract].[prek12Rank]' />
+            <map key='[rank]' value='[Extract].[rank]' />
+            <map key='[totalScore]' value='[Extract].[totalScore]' />
+            <map key='[workEnvironRank]' value='[Extract].[workEnvironRank]' />
+          </cols>
+          <refresh increment-key='' incremental-updates='false'>
+            <refresh-event add-from-file-path='Household income.csv+ (Multiple Connections)' increment-value='%null%' refresh-type='create' rows-inserted='49' timestamp-start='2020-03-02 05:07:29.927' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>rank</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[rank]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>rank</remote-alias>
+              <ordinal>0</ordinal>
+              <family>Household income.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>State5</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[State]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>State5</remote-alias>
+              <ordinal>1</ordinal>
+              <family>Household income.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Population</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Population]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Population</remote-alias>
+              <ordinal>2</ordinal>
+              <family>Household income.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>HouseholdIncome</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[HouseholdIncome]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>HouseholdIncome</remote-alias>
+              <ordinal>3</ordinal>
+              <family>Household income.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>State2</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[State (Sheet1)]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>State2</remote-alias>
+              <ordinal>4</ordinal>
+              <family>Sheet1</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='1' name='LEN_RUS_S2' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Rent</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Rent]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Rent</remote-alias>
+              <ordinal>5</ordinal>
+              <family>Sheet1</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>47</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>overall</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[overall]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>overall</remote-alias>
+              <ordinal>6</ordinal>
+              <family>happiness.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>State4</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[State (happiness.csv)]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>State4</remote-alias>
+              <ordinal>7</ordinal>
+              <family>happiness.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>totalScore</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[totalScore]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>totalScore</remote-alias>
+              <ordinal>8</ordinal>
+              <family>happiness.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>48</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>emotAndPhysRank</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[emotAndPhysRank]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>emotAndPhysRank</remote-alias>
+              <ordinal>9</ordinal>
+              <family>happiness.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>workEnvironRank</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[workEnvironRank]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>workEnvironRank</remote-alias>
+              <ordinal>10</ordinal>
+              <family>happiness.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>communityAndEnvironRank</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[communityAndEnvironRank]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>communityAndEnvironRank</remote-alias>
+              <ordinal>11</ordinal>
+              <family>happiness.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>State1</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[State (HOuse median price.csv)]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>State1</remote-alias>
+              <ordinal>12</ordinal>
+              <family>HOuse median price.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Median House Price</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Median House Price]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Median House Price</remote-alias>
+              <ordinal>13</ordinal>
+              <family>HOuse median price.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Monthly Payment</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Monthly Payment]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Monthly Payment</remote-alias>
+              <ordinal>14</ordinal>
+              <family>HOuse median price.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>State</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[State (Education Ranking.csv)]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>State</remote-alias>
+              <ordinal>15</ordinal>
+              <family>Education Ranking.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>overallRank</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[overallRank]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>overallRank</remote-alias>
+              <ordinal>16</ordinal>
+              <family>Education Ranking.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>higherEducationRank</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[higherEducationRank]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>higherEducationRank</remote-alias>
+              <ordinal>17</ordinal>
+              <family>Education Ranking.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>prek12Rank</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[prek12Rank]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>prek12Rank</remote-alias>
+              <ordinal>18</ordinal>
+              <family>Education Ranking.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Pop</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Pop]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Pop</remote-alias>
+              <ordinal>19</ordinal>
+              <family>Education Ranking.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>State3</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[State (Sheet11)]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>State3</remote-alias>
+              <ordinal>20</ordinal>
+              <family>Sheet11</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='1' name='LEN_RUS_S2' />
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Average Insurance</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Average Insurance]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Average Insurance</remote-alias>
+              <ordinal>21</ordinal>
+              <family>Sheet11</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>49</approx-count>
+              <contains-null>true</contains-null>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' dim-percentage='0.638336' measure-ordering='alphabetic' measure-percentage='0.301989' parameter-percentage='0.0596745' show-structure='true' user-set-layout='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <datasource-dependencies datasource='Parameters'>
+        <column caption='Y Axis' datatype='string' name='[Parameter 2]' param-domain-type='list' role='measure' type='nominal' value='&quot;Buy House&quot;'>
+          <calculation class='tableau' formula='&quot;Buy House&quot;' />
+        </column>
+        <column caption='Color By' datatype='string' name='[Parameter 3]' param-domain-type='list' role='measure' type='nominal' value='&quot;Happiness Score&quot;'>
+          <calculation class='tableau' formula='&quot;Happiness Score&quot;' />
+        </column>
+      </datasource-dependencies>
+    </datasource>
+  </datasources>
+  <actions>
+    <action caption='Filter1' name='[Action1]'>
+      <activation auto-clear='true' type='on-hover' />
+      <source dashboard='Where to Buy/Rent' type='sheet' worksheet='Scatter' />
+      <command command='tsc:tsl-filter'>
+        <param name='exclude' value='Scatter,Sheet 6' />
+        <param name='on-empty' value='none' />
+        <param name='special-fields' value='all' />
+        <param name='target' value='Where to Buy/Rent' />
+      </command>
+    </action>
+  </actions>
+  <worksheets>
+    <worksheet name='Education'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontsize='10' underline='true'>Education Ranking</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Household income.csv+ (Multiple Connections)' name='federated.0umq5td0bwl78a122imlu1o8ho9a' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0umq5td0bwl78a122imlu1o8ho9a'>
+            <column datatype='integer' name='[Average Insurance]' role='measure' type='quantitative' />
+            <column caption='Interest Paid per month' datatype='real' name='[Calculation_1288029518178967553]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='(([Median House Price]*(3.99/100))/12) + ([Average Insurance]/12)' />
+            </column>
+            <column caption='Monthly Mortgage Payment' datatype='real' name='[Calculation_1288029518181019650]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[Monthly Payment]+([Average Insurance]/12)' />
+            </column>
+            <column caption='Average Household Income' datatype='integer' name='[HouseholdIncome]' role='measure' type='quantitative' />
+            <column datatype='integer' name='[Median House Price]' role='measure' type='quantitative' />
+            <column datatype='real' name='[Monthly Payment]' role='measure' type='quantitative' />
+            <column datatype='integer' name='[Pop]' role='measure' type='quantitative' />
+            <column caption='Monthly Average Rent' datatype='integer' name='[Rent]' role='measure' type='quantitative' />
+            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+            <column caption='Community And Environment' datatype='integer' name='[communityAndEnvironRank]' role='measure' type='quantitative' />
+            <column caption='Emotional and Physical Wellbeing' datatype='integer' name='[emotAndPhysRank]' role='measure' type='quantitative' />
+            <column caption='Higher Education Rank' datatype='integer' name='[higherEducationRank]' role='measure' type='quantitative' />
+            <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
+            <column caption='Education Overall Rank' datatype='integer' name='[overallRank]' role='measure' type='quantitative' />
+            <column caption='(Pre)K - 12 Rank' datatype='integer' name='[prek12Rank]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_1288029518178967553]' derivation='Sum' name='[sum:Calculation_1288029518178967553:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1288029518181019650]' derivation='Sum' name='[sum:Calculation_1288029518181019650:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[HouseholdIncome]' derivation='Sum' name='[sum:HouseholdIncome:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Median House Price]' derivation='Sum' name='[sum:Median House Price:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Monthly Payment]' derivation='Sum' name='[sum:Monthly Payment:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Pop]' derivation='Sum' name='[sum:Pop:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Rent]' derivation='Sum' name='[sum:Rent:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[communityAndEnvironRank]' derivation='Sum' name='[sum:communityAndEnvironRank:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[emotAndPhysRank]' derivation='Sum' name='[sum:emotAndPhysRank:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[higherEducationRank]' derivation='Sum' name='[sum:higherEducationRank:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[overallRank]' derivation='Sum' name='[sum:overallRank:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[prek12Rank]' derivation='Sum' name='[sum:prek12Rank:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[workEnvironRank]' derivation='Sum' name='[sum:workEnvironRank:qk]' pivot='key' type='quantitative' />
+            <column caption='Work Environment' datatype='integer' name='[workEnvironRank]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]'>
+            <groupfilter function='union' user:op='manual'>
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:overallRank:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:prek12Rank:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:higherEducationRank:qk]&quot;' />
+            </groupfilter>
+          </filter>
+          <manual-sort column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:HouseholdIncome:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Median House Price:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Monthly Payment:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Calculation_1288029518178967553:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Calculation_1288029518181019650:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Rent:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:overallRank:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:prek12Rank:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:higherEducationRank:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Pop:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:emotAndPhysRank:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:communityAndEnvironRank:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:workEnvironRank:qk]&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <filter class='categorical' column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[Action (State)]'>
+            <groupfilter function='empty-level' member='[State]' user:ui-action-filter='[Action1]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:State:nk]'>
+            <groupfilter function='level-members' level='[none:State:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]</column>
+            <column>[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:State:nk]</column>
+            <column>[federated.0umq5td0bwl78a122imlu1o8ho9a].[Action (State)]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='height' field='[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]' value='40' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='width' field='[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]' value='312' />
+            <format attr='band-color' scope='rows' value='#00000000' />
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='band-color' scope='rows' value='#00000000' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='band-size' scope='rows' value='1' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[Multiple Values]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minheight' value='-1' />
+                <format attr='maxheight' value='-1' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{BCE48B7D-7417-4570-82F7-075CCBC98E88}' />
+    </worksheet>
+    <worksheet name='Happiness'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontsize='10' underline='true'>Happiness Ranking</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Household income.csv+ (Multiple Connections)' name='federated.0umq5td0bwl78a122imlu1o8ho9a' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0umq5td0bwl78a122imlu1o8ho9a'>
+            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+            <column caption='Community And Environment' datatype='integer' name='[communityAndEnvironRank]' role='measure' type='quantitative' />
+            <column caption='Emotional and Physical Wellbeing' datatype='integer' name='[emotAndPhysRank]' role='measure' type='quantitative' />
+            <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
+            <column caption='Happiness Rank' datatype='integer' name='[overall]' role='measure' type='quantitative' />
+            <column-instance column='[communityAndEnvironRank]' derivation='Sum' name='[sum:communityAndEnvironRank:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[emotAndPhysRank]' derivation='Sum' name='[sum:emotAndPhysRank:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[overall]' derivation='Sum' name='[sum:overall:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[totalScore]' derivation='Sum' name='[sum:totalScore:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[workEnvironRank]' derivation='Sum' name='[sum:workEnvironRank:qk]' pivot='key' type='quantitative' />
+            <column caption='Happiness Score' datatype='real' name='[totalScore]' role='measure' type='quantitative' />
+            <column caption='Work Environment' datatype='integer' name='[workEnvironRank]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]'>
+            <groupfilter function='union' user:op='manual'>
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:overall:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:totalScore:qk]&quot;' />
+            </groupfilter>
+          </filter>
+          <manual-sort column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:overall:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:totalScore:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:emotAndPhysRank:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:communityAndEnvironRank:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:workEnvironRank:qk]&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <filter class='categorical' column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[Action (State)]'>
+            <groupfilter function='empty-level' member='[State]' user:ui-action-filter='[Action1]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:State:nk]'>
+            <groupfilter function='level-members' level='[none:State:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]</column>
+            <column>[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:State:nk]</column>
+            <column>[federated.0umq5td0bwl78a122imlu1o8ho9a].[Action (State)]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='height' field='[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]' value='58' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='width' field='[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]' value='308' />
+            <format attr='band-color' scope='rows' value='#00000000' />
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='band-color' scope='rows' value='#00000000' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='band-size' scope='rows' value='1' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[Multiple Values]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minheight' value='-1' />
+                <format attr='maxheight' value='-1' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{8158A6E4-2736-4F11-AA44-BCBD691EECAE}' />
+    </worksheet>
+    <worksheet name='Income'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Household income.csv+ (Multiple Connections)' name='federated.0umq5td0bwl78a122imlu1o8ho9a' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0umq5td0bwl78a122imlu1o8ho9a'>
+            <column datatype='integer' name='[Average Insurance]' role='measure' type='quantitative' />
+            <column caption='Interest Paid per month' datatype='real' name='[Calculation_1288029518178967553]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='(([Median House Price]*(3.99/100))/12) + ([Average Insurance]/12)' />
+            </column>
+            <column caption='Monthly Mortgage Payment' datatype='real' name='[Calculation_1288029518181019650]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[Monthly Payment]+([Average Insurance]/12)' />
+            </column>
+            <column caption='Average Household Income' datatype='integer' name='[HouseholdIncome]' role='measure' type='quantitative' />
+            <column datatype='integer' name='[Median House Price]' role='measure' type='quantitative' />
+            <column datatype='real' name='[Monthly Payment]' role='measure' type='quantitative' />
+            <column datatype='integer' name='[Pop]' role='measure' type='quantitative' />
+            <column caption='Monthly Average Rent' datatype='integer' name='[Rent]' role='measure' type='quantitative' />
+            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+            <column caption='Community And Environment' datatype='integer' name='[communityAndEnvironRank]' role='measure' type='quantitative' />
+            <column caption='Emotional and Physical Wellbeing' datatype='integer' name='[emotAndPhysRank]' role='measure' type='quantitative' />
+            <column caption='Higher Education Rank' datatype='integer' name='[higherEducationRank]' role='measure' type='quantitative' />
+            <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
+            <column caption='Education Overall Rank' datatype='integer' name='[overallRank]' role='measure' type='quantitative' />
+            <column caption='(Pre)K - 12 Rank' datatype='integer' name='[prek12Rank]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_1288029518178967553]' derivation='Sum' name='[sum:Calculation_1288029518178967553:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1288029518181019650]' derivation='Sum' name='[sum:Calculation_1288029518181019650:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[HouseholdIncome]' derivation='Sum' name='[sum:HouseholdIncome:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Median House Price]' derivation='Sum' name='[sum:Median House Price:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Monthly Payment]' derivation='Sum' name='[sum:Monthly Payment:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Pop]' derivation='Sum' name='[sum:Pop:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Rent]' derivation='Sum' name='[sum:Rent:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[communityAndEnvironRank]' derivation='Sum' name='[sum:communityAndEnvironRank:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[emotAndPhysRank]' derivation='Sum' name='[sum:emotAndPhysRank:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[higherEducationRank]' derivation='Sum' name='[sum:higherEducationRank:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[overallRank]' derivation='Sum' name='[sum:overallRank:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[prek12Rank]' derivation='Sum' name='[sum:prek12Rank:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[workEnvironRank]' derivation='Sum' name='[sum:workEnvironRank:qk]' pivot='key' type='quantitative' />
+            <column caption='Work Environment' datatype='integer' name='[workEnvironRank]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]'>
+            <groupfilter function='union' user:op='manual'>
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:HouseholdIncome:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Median House Price:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Calculation_1288029518181019650:qk]&quot;' />
+              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Rent:qk]&quot;' />
+            </groupfilter>
+          </filter>
+          <manual-sort column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:HouseholdIncome:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Median House Price:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Monthly Payment:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Calculation_1288029518178967553:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Calculation_1288029518181019650:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Rent:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:overallRank:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:prek12Rank:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:higherEducationRank:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Pop:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:emotAndPhysRank:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:communityAndEnvironRank:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:workEnvironRank:qk]&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <filter class='categorical' column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[Action (State)]'>
+            <groupfilter function='empty-level' member='[State]' user:ui-action-filter='[Action1]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:State:nk]'>
+            <groupfilter function='level-members' level='[none:State:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]</column>
+            <column>[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:State:nk]</column>
+            <column>[federated.0umq5td0bwl78a122imlu1o8ho9a].[Action (State)]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='height' field='[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]' value='28' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='width' field='[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]' value='316' />
+            <format attr='band-color' scope='rows' value='#00000000' />
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='band-color' scope='rows' value='#00000000' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='band-size' scope='rows' value='1' />
+          </style-rule>
+          <style-rule element='table-div'>
+            <format attr='stroke-size' scope='rows' value='0' />
+            <format attr='line-visibility' scope='rows' value='off' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[Multiple Values]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minheight' value='-1' />
+                <format attr='maxheight' value='-1' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0umq5td0bwl78a122imlu1o8ho9a].[:Measure Names]</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{203CEAB7-A703-42D0-B5EF-4C067FE16FD5}' />
+    </worksheet>
+    <worksheet name='Scatter'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Household income.csv+ (Multiple Connections)' name='federated.0umq5td0bwl78a122imlu1o8ho9a' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='Parameters'>
+            <column caption='Y Axis' datatype='string' name='[Parameter 2]' param-domain-type='list' role='measure' type='nominal' value='&quot;Buy House&quot;'>
+              <calculation class='tableau' formula='&quot;Buy House&quot;' />
+            </column>
+            <column caption='Color By' datatype='string' name='[Parameter 3]' param-domain-type='list' role='measure' type='nominal' value='&quot;Happiness Score&quot;'>
+              <calculation class='tableau' formula='&quot;Happiness Score&quot;' />
+            </column>
+          </datasource-dependencies>
+          <datasource-dependencies datasource='federated.0umq5td0bwl78a122imlu1o8ho9a'>
+            <column datatype='integer' name='[Average Insurance]' role='measure' type='quantitative' />
+            <column caption='Monthly Income' datatype='real' name='[Calculation_1288029518144163840]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM([HouseholdIncome]/12)' />
+            </column>
+            <column caption='Monthly Mortgage Payment' datatype='real' name='[Calculation_1288029518181019650]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[Monthly Payment]+([Average Insurance]/12)' />
+            </column>
+            <column caption='Color By' datatype='real' name='[Calculation_1288029518196752389]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='if [Parameters].[Parameter 3] = &apos;Happiness Score&apos; then [totalScore]&#13;&#10;ELSEIF [Parameters].[Parameter 3] = &apos;Higher Education Rank&apos; then abs([higherEducationRank]-52)&#13;&#10;else abs([prek12Rank]-52) end' />
+            </column>
+            <column caption='Monthly Mortgage / Rent Payment' datatype='real' name='[Calculation_1288029518199349254]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='if [Parameters].[Parameter 2] = &apos;Rent House&apos; then [Rent]&#13;&#10;else [Calculation_1288029518181019650] end' />
+            </column>
+            <column caption='Average Household Income' datatype='integer' name='[HouseholdIncome]' role='measure' type='quantitative' />
+            <column datatype='real' name='[Monthly Payment]' role='measure' type='quantitative' />
+            <column caption='Monthly Average Rent' datatype='integer' name='[Rent]' role='measure' type='quantitative' />
+            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+            <column caption='Higher Education Rank' datatype='integer' name='[higherEducationRank]' role='measure' type='quantitative' />
+            <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
+            <column caption='(Pre)K - 12 Rank' datatype='integer' name='[prek12Rank]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_1288029518196752389]' derivation='Sum' name='[sum:Calculation_1288029518196752389:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1288029518199349254]' derivation='Sum' name='[sum:Calculation_1288029518199349254:qk]' pivot='key' type='quantitative' />
+            <column caption='Happiness Score' datatype='real' name='[totalScore]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_1288029518144163840]' derivation='User' name='[usr:Calculation_1288029518144163840:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Calculation_1288029518199349254:qk]' included-values='all' />
+          <filter class='quantitative' column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[usr:Calculation_1288029518144163840:qk]' included-values='all' />
+          <slices>
+            <column>[federated.0umq5td0bwl78a122imlu1o8ho9a].[usr:Calculation_1288029518144163840:qk]</column>
+            <column>[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Calculation_1288029518199349254:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.0umq5td0bwl78a122imlu1o8ho9a].[usr:Calculation_1288029518144163840:qk]' scope='cols' value='Monthly Household Income' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Calculation_1288029518196752389:qk]' palette='purple_10_0' type='interpolated' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='background-color' value='#00000000' />
+          </style-rule>
+          <style-rule element='gridline'>
+            <format attr='stroke-size' scope='rows' value='0' />
+            <format attr='line-visibility' scope='rows' value='off' />
+            <format attr='stroke-size' scope='cols' value='0' />
+            <format attr='line-visibility' scope='cols' value='off' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Shape' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <color column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Calculation_1288029518196752389:qk]' />
+              <size column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Calculation_1288029518196752389:qk]' />
+              <text column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:State:nk]' />
+              <lod column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:State:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='1.1974033117294312' />
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='shape' value=':filled/circle' />
+                <format attr='mark-transparency' value='255' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Calculation_1288029518199349254:qk]</rows>
+        <cols>[federated.0umq5td0bwl78a122imlu1o8ho9a].[usr:Calculation_1288029518144163840:qk]</cols>
+        <tooltip-style tooltip-mode='none' />
+      </table>
+      <simple-id uuid='{B7E9960D-AC8E-448E-BCE0-D53BF46F5D0D}' />
+    </worksheet>
+    <worksheet name='Sheet 6'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Household income.csv+ (Multiple Connections)' name='federated.0umq5td0bwl78a122imlu1o8ho9a' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0umq5td0bwl78a122imlu1o8ho9a'>
+            <column caption='Calculation1' datatype='string' name='[Calculation_1288029518202597383]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='&apos;Metrics Definition&apos;' />
+            </column>
+            <column-instance column='[Calculation_1288029518202597383]' derivation='None' name='[none:Calculation_1288029518202597383:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:Calculation_1288029518202597383:nk]'>
+            <groupfilter function='member' level='[none:Calculation_1288029518202597383:nk]' member='&quot;Metrics Definition&quot;' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:Calculation_1288029518202597383:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='header'>
+            <format attr='width' field='[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:Calculation_1288029518202597383:nk]' value='624' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='display' field='[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:Calculation_1288029518202597383:nk]' value='false' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='rows' value='false' />
+          </style-rule>
+          <style-rule element='table-div'>
+            <format attr='stroke-size' scope='rows' value='0' />
+            <format attr='line-visibility' scope='rows' value='off' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Shape' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <customized-tooltip>
+              <formatted-text>
+                <run bold='true' fontsize='12' underline='true'>How to use this visualization</run>
+                <run>&#10;Use the filters titled monthly income and monthly buy / rent payment to filter on required income range and house price range.&#10;Use Y axis filter to toggle between buying house and renting house&#10;Use Color By to plot the scatter dots color intensity and size by Happiness Score, (Pre)K - 12 Public Schools Rank or Higher Education Rank</run>
+              </formatted-text>
+            </customized-tooltip>
+            <style>
+              <style-rule element='mark'>
+                <format attr='shape' value='Bug Tracking/light.png' />
+                <format attr='size' value='1.5272375345230103' />
+                <format attr='mark-color' value='#67475e' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:Calculation_1288029518202597383:nk]</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{9076CC70-3439-4C4A-95F6-9666BF86F85D}' />
+    </worksheet>
+    <worksheet name='State Name'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Household income.csv+ (Multiple Connections)' name='federated.0umq5td0bwl78a122imlu1o8ho9a' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0umq5td0bwl78a122imlu1o8ho9a'>
+            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+            <column-instance column='[State]' derivation='None' name='[none:State:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0umq5td0bwl78a122imlu1o8ho9a].[Action (State)]'>
+            <groupfilter function='empty-level' member='[State]' user:ui-action-filter='[Action1]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0umq5td0bwl78a122imlu1o8ho9a].[Action (State)]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='font-size' value='12' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='width' field='[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:State:nk]' value='340' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='rows' value='false' />
+            <format attr='font-size' value='12' />
+          </style-rule>
+          <style-rule element='table-div'>
+            <format attr='stroke-size' scope='rows' value='0' />
+            <format attr='line-visibility' scope='rows' value='off' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:State:nk]</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{3C10979A-9143-4FA3-830F-B6CEF642585D}' />
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard name='Where to Buy/Rent'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontcolor='#67475e' fontsize='20' underline='true'>Where to &lt;</run>
+            <run bold='true' fontcolor='#67475e' fontsize='20' underline='true'>[Parameters].[Parameter 2]</run>
+            <run bold='true' fontcolor='#67475e' fontsize='20' underline='true'>&gt;?</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <style />
+      <size maxheight='827' maxwidth='1169' minheight='827' minwidth='1169' preset-index='16' sizing-mode='fixed' />
+      <datasources>
+        <datasource name='Parameters' />
+        <datasource caption='Household income.csv+ (Multiple Connections)' name='federated.0umq5td0bwl78a122imlu1o8ho9a' />
+      </datasources>
+      <datasource-dependencies datasource='Parameters'>
+        <column caption='Y Axis' datatype='string' name='[Parameter 2]' param-domain-type='list' role='measure' type='nominal' value='&quot;Buy House&quot;'>
+          <calculation class='tableau' formula='&quot;Buy House&quot;' />
+          <members>
+            <member value='&quot;Buy House&quot;' />
+            <member value='&quot;Rent House&quot;' />
+          </members>
+        </column>
+        <column caption='Color By' datatype='string' name='[Parameter 3]' param-domain-type='list' role='measure' type='nominal' value='&quot;Happiness Score&quot;'>
+          <calculation class='tableau' formula='&quot;Happiness Score&quot;' />
+          <members>
+            <member value='&quot;Happiness Score&quot;' />
+            <member value='&quot;(Pre)K - 12 Rank&quot;' />
+            <member value='&quot;Higher Education Rank&quot;' />
+          </members>
+        </column>
+      </datasource-dependencies>
+      <datasource-dependencies datasource='federated.0umq5td0bwl78a122imlu1o8ho9a'>
+        <column caption='Monthly Income' datatype='real' name='[Calculation_1288029518144163840]' role='measure' type='quantitative'>
+          <calculation class='tableau' formula='SUM([HouseholdIncome]/12)' />
+        </column>
+        <column caption='Monthly Mortgage / Rent Payment' datatype='real' name='[Calculation_1288029518199349254]' role='measure' type='quantitative'>
+          <calculation class='tableau' formula='if [Parameters].[Parameter 2] = &apos;Rent House&apos; then [Rent]&#13;&#10;else [Calculation_1288029518181019650] end' />
+        </column>
+        <column-instance column='[Calculation_1288029518199349254]' derivation='Sum' name='[sum:Calculation_1288029518199349254:qk]' pivot='key' type='quantitative' />
+        <column-instance column='[Calculation_1288029518144163840]' derivation='User' name='[usr:Calculation_1288029518144163840:qk]' pivot='key' type='quantitative' />
+      </datasource-dependencies>
+      <zones>
+        <zone h='100000' id='4' type='layout-basic' w='100000' x='0' y='0'>
+          <zone h='98066' id='5' param='vert' type='layout-flow' w='98632' x='684' y='967'>
+            <zone h='7618' id='7' type='title' w='98632' x='684' y='967'>
+              <zone-style>
+                <format attr='border-color' value='#000000' />
+                <format attr='border-style' value='none' />
+                <format attr='border-width' value='0' />
+                <format attr='margin' value='4' />
+              </zone-style>
+            </zone>
+            <zone h='90448' id='6' type='layout-basic' w='98632' x='684' y='8585' />
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+        <zone h='42805' id='13' param='vert' type='layout-flow' w='36185' x='9239' y='25635'>
+          <zone fixed-size='133' h='17049' id='14' is-fixed='true' name='Income' show-title='false' w='36185' x='9239' y='25635'>
+            <layout-cache type-h='cell' type-w='fixed' />
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='0' id='15' name='Happiness' show-title='false' w='36185' x='9239' y='42684'>
+            <layout-cache type-h='cell' type-w='fixed' />
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone fixed-size='114' h='14752' id='16' is-fixed='true' name='Education' show-title='false' w='36185' x='9239' y='42684'>
+            <layout-cache type-h='cell' type-w='fixed' />
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+        </zone>
+        <zone h='4958' id='18' name='State Name' show-title='false' w='29085' x='9239' y='19952' />
+        <zone h='51149' id='21' type='empty' w='37896' x='9068' y='17533' />
+        <zone h='8343' id='22' param='horz' type='layout-flow' w='98204' x='1198' y='8464'>
+          <zone fixed-size='215' h='8343' id='24' is-fixed='true' mode='compact' param='[Parameters].[Parameter 2]' type='paramctrl' w='19076' x='1198' y='8464'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone fixed-size='203' h='8343' id='23' is-fixed='true' mode='compact' param='[Parameters].[Parameter 3]' type='paramctrl' w='18049' x='20274' y='8464'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone fixed-size='385' h='8343' id='25' is-fixed='true' name='Scatter' param='[federated.0umq5td0bwl78a122imlu1o8ho9a].[usr:Calculation_1288029518144163840:qk]' type='filter' values='database' w='33618' x='38323' y='8464'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+          <zone h='8343' id='26' name='Scatter' param='[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Calculation_1288029518199349254:qk]' type='filter' values='database' w='27461' x='71941' y='8464'>
+            <zone-style>
+              <format attr='border-color' value='#000000' />
+              <format attr='border-style' value='none' />
+              <format attr='border-width' value='0' />
+              <format attr='margin' value='4' />
+            </zone-style>
+          </zone>
+        </zone>
+        <zone h='81258' id='8' name='Scatter' show-title='false' w='97861' x='855' y='17896' />
+        <zone h='7497' id='35' name='Sheet 6' show-title='false' w='7100' x='92044' y='846' />
+      </zones>
+      <simple-id uuid='{70D85DB4-D520-4B51-9F3F-089CD725B25B}' />
+    </dashboard>
+  </dashboards>
+  <windows saved-dpi-scale-factor='1.5' source-height='44'>
+    <window class='dashboard' maximized='true' name='Where to Buy/Rent'>
+      <viewpoints>
+        <viewpoint name='Education'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Happiness'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Income'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Scatter'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Sheet 6'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='State Name'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='8' />
+      <simple-id uuid='{C851D439-F13A-4D2B-897C-7EB35EC3AC47}' />
+    </window>
+    <window class='worksheet' name='Sheet 6'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='30'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:Calculation_1288029518202597383:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{8019CCA1-9C95-41B0-B024-5ED6FC90E3BF}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Education'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card type='measures' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='30'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:State:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{95448900-F2F7-42DA-A8E8-F239ADFA35FA}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Happiness'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card type='measures' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:State:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{A8825DAE-185F-45C4-A8A8-C83428CAA0F2}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Income'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card type='measures' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='30'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:State:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{8EBA163C-03FA-486E-AC3B-A3DBB968D2B3}' />
+    </window>
+    <window class='worksheet' hidden='true' name='Scatter'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='30'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='2' param='[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Calculation_1288029518196752389:qk]' type='size' />
+            <card pane-specification-id='2' param='[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Calculation_1288029518196752389:qk]' type='color' />
+            <card mode='compact' param='[Parameters].[Parameter 3]' type='parameter' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.0umq5td0bwl78a122imlu1o8ho9a].[sum:Calculation_1288029518196752389:qk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{44084906-FFBF-4705-ADF3-E254530CE3BD}' />
+    </window>
+    <window class='worksheet' hidden='true' name='State Name'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='30'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.0umq5td0bwl78a122imlu1o8ho9a].[none:State:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{89E70227-D476-454E-AB86-288BE14701D0}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='24' name='Sheet 6' width='64'>
+      iVBORw0KGgoAAAANSUhEUgAAAEAAAAAYCAYAAABKtPtEAAAACXBIWXMAABYlAAAWJQFJUiTw
+      AAABNElEQVRYhe2XTUrDUBRGz9NaCAX/YiJKQSpqQewChG7BLTh0IS7AvbgAcaQIDguCtYgg
+      dVCiwdIYKu2Lo1TE8cu90JzhnXxfTu7Lj8myLGOOWZAuIE0pQLqANKUA6QLSlAKkC0hTCpAu
+      IM3cC6hIF8ix1tLrdhgObsEmNI5O8TdC57lGy7/AQ+eGlekl68sTALp9n/rhGb4fOM1VcQSS
+      JMF+Xs0uHmB/+52Xx2vn2SoExHHMam30Z2YMZN9959kqBFSrVSZ26d/cLNacZ6sQEAQBg68m
+      k+nv7GNYYW2r7TxbhQBjDAetE57eNmez11GbnUbTfbaWtwBAmqb07s/Zq4/xdi8KyVSxATme
+      5zEYH3P37H71c9R8COUkKVhb3H1RtQEARZ9IdQLCMCSKosLyVD0EJfgBhTJWzLN6dpIAAAAA
+      SUVORK5CYII=
+    </thumbnail>
+    <thumbnail height='192' name='Where to Buy/Rent' width='192'>
+      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAABYlAAAWJQFJUiTw
+      AAAgAElEQVR4nO29eXSkV3nn/3lr3yTVoqVUWlp7t7Ze3G63NwwONthAYhIyJJgkhDAMmXMY
+      BibhsM3JL4GZzCSZCQwEksMSskBiAzaLwRiDjW26Tbt3dWvfq7SUSrVXqfZ3+f2h7uqWJdnu
+      XbTu55w+rfetV7eeKr3f9z73Ps99rqRpmoZAsE3R3WgDBIIbiRCAYFsjBCDY1ggBCLY1QgCC
+      bc06AaiKgqKo5440FFled6yqGnPDg5w+OXH9LH0VFFlGLpVW/8kyVzq5pSgKqqqWj1e/F+VK
+      zXxFNG31+5Vl5YrtF7w21gng+A++y1e/9D0ANFXlix/5GF/8v49cOP5vn2J8NkZwfJShwZlr
+      Zth3PvcF5kKZ13z9o//7r/nQ2z/Ah3/rj/nT3/kQX/nsI5TUy7+JvvvZz/Hs88Pl42M/eJyv
+      /v33L7u9V0fmiS99hY+964N89F0f5pmfnUJI4NqzTgDtvV3MjEyiAUo2Tt7qoxQKIGsg55KE
+      YhrNTe7VizWN5HKIkVPD5PKlc6c0UpEwwycHSSazaIAqF5k4O4asqsyNT5DOFNE0jeVAgJHT
+      o+QLpTU2LExMMjk4wcjJQYZODFOSVTRNI7q4wPDJIdIreTZ6QL7rkx/n7574Gv/zq59heeAX
+      TMwmKKSTTE/MoZ2zbXJgiJKiMXVmiJXsOZvVEuOnRpDV9W1uhKZpJJeXGT45SDy+smqLpjA1
+      OEaxtNrIciBAJJIGNHLpJCMnzzI15keWlXPvqTA3NsHE8DSyogIKnpZuPvOvX+DDH3+YZx/7
+      McprtEdw+RhefsLV2o4h6ieaUciNT+Dr6UObO00wksOwNIWjtRObUQJg8OfP4D/xEmp+BeuO
+      Xv7kU+9h6uiLfPULj+FtqmVpPsoH/ucnaHDCNz73de6+bx+/PDTCH3zyI5x64jv85OkzeNw2
+      kjkDf/I3H6XSZgRg9KWjROI5Tj7zHGOOSpp7Oxn+0RM8/u3D1DdWE5yP8v7PfIyO1po1tity
+      iUIuT8gfQDU78dY4iM8O8K1vn+Jjn34/oPFvf/UFPvj1v+f0T3+CcSbNbzx0O6HRs3zr0SN8
+      al/32vZKJYqFIsC5G1cPaAw//yz//OUn8O2oJxhY4l0f+zB7e2v59//3j/ynv/4Lal0Wjv3w
+      CUydd3PXLbX874/8Fa6GBgrpBLt+7UEeevvtPPLXn2M8sIJZV8Rc38V/+cR7uOutr0PTNMKL
+      IXZ0d6GXrv4fXLCWdQLQGWy0tnuYnVhkZXiS9t67UKxRZsYDGBan6OjtLF/bdcfr+MP/9Ouk
+      AyN8+i+/B5rC09/6Me/6+EfY1VHL6R8/wfNP/5KH33kHhVSUJB4+9YX/Dy2X4J9+eoYP/c1/
+      x2k38v3Pf4GTxyd5wz2rN+Abf+9hRo6f5M0f+s90NleiFdM8+fghPvR//4KGugpOPfkDfvyd
+      n/HBj76Li++Rb//N3/K4Xgd6E+/40AdwOQyENvzYEq972xv5f5//CW/9jYOcfP4lDt53Fy+/
+      337w+b/jR19c7SQVRWH3A29DU0r8+NGneO9ffJLuzlqmXnqBR/79Sfb8jz/c8J1yiRglvY39
+      r7+D1p5OvF43sZkxxpfgT//PxzGg8KWP/gX+xTTtjZVM/PIFfjkQ5X0ffQ+SEMA1Z50AkCQ6
+      ejuYHpkkMz7PW369CcUU4emjkxiXZuh+6O7ypSarGUkCne6cJ6XKpBIr/Owbj/ALox6A5j23
+      rF5b4ebB334jep1ENp8lk0zy6Oe+fM4H09Fs2txIJZelaLTjcTsA8LU1k3rhxXXX/e4nPsbd
+      d3aSDC/ztU//LR7vR6jepM2arj68hm8yNDzHmYEAH/iD96+75jf/5CPcd28fAC9999ucXgBN
+      LpEtytTVr7Zc19pMLnqIzbwVd1s3D//RWzl26CRP/euj3PaO32F/i55UaJGv/68vAWB0e9EU
+      GYCJM8M8+J7fw2Ze/6cRXH02/JY7ers4/OhLGGUjtVVG5I52Qv/yHGo6zoMd9Zu3pjfia6zG
+      tusWHvz1Oyikk8RSqy6EJElI5x5pFocTl9PGrQ+8mX372kgEF1HNzjVNmUwmApN+GjztWBwu
+      qo15jhw6w237W3nhh8+xY1f3uie2XCxSyBdA09AUmXQqS7UVVmIJMitZQpPjrOQ5Z4+e1z1w
+      Nz/40ldwduzBZX9tN5zOZMFXW8Whn77Ifffv5dAPnqF+Vzt6JCSlRDQcR5eRmfMv094J8YU5
+      NEc1v/uh/8jM0UP8+BcT3HfnvZhNJu7//f9Ac6OH4OQULtequN/03j9C0oub/3qxYRzA29XF
+      yuQwnvYuJMBgdVJBHNnVjMu2+mTXGwwYDfpzregwW0yAjt/4wB+wNPAi//0PPsJn/+yLLC2n
+      QJIwWcwX3tRs5+EPPswL3/xXPvF7H+Frn3+ETF5eY8M9Dz3Is1/7Mn/2ob8iX9Lz7v/2Rxx7
+      /Ft88r0fJyxX8dA7711zvdFk4nuf/wIfe/i/8j/+6/+ipv929t/SSnVbJ9WGBH/2vo9z6NAo
+      Nru5LJy+199DNhTk4BvvXPcdGExGDPoLX4/eYMBoNICk5x0ffC+zLz7DJ9/zUUbmCvzOe98G
+      ejMH79nDVz7xab7+xe+AwYxer0eHys//7VE+9fsf4dFHD/Hgb9+Hw7uD3374DfzbX/4tn/j9
+      P+W7jzyDcm5U/y+f/ksOvzh2KX9DwRUgXZwNqqoqT/7bD26kPdcNpVRiJZng7NFhDj5wD0bd
+      1nO43/zOt2I0GW+0GTc10nZNhz755Pd59JHDvPPDH2D/Le032hzBDWLbCkAgAJELJNjmCAEI
+      tjVCAIJtzToBLPtHmVyIMTpwglRBAU3jJ997hIVYtnxNIRXi7OTCdTX0apEMz/NP//g1Bqcu
+      2D/w4tME4sUNr3/p50/x5S9/hSOnR6+XiZdGLsZXv/EYmqbxsx88QiCa3fCyY8ePgabws2ee
+      BSAfnuKnR0fWXDM7doblVOGam7yVWBdxqfY18+Q3v43FVsmuPfuR8wmi6RzHj50iYFohq0g0
+      1NewvGLg6z97DOeO3fzmg2+4AaZfDhpP/PAp3vHwezBpef7xH/6OoslNX6MJcyrG33/z21ir
+      m+lwGphJpHnHb/8u01OzNDY3MTMzQ2h2jAO9OwhRx77OVwgIXk+KaQZOHCP4tvsZO3OWqp13
+      8eS/fxWjq4GeGiPDi2HqGtt5/vvfIZwuMnHyCGdOneSdv/kAsUiYJ55awmkosO/1byI0N0Ol
+      uZZvf/0bFKngbW86wE9+fpR77r6dF57/Bb6OfgzpBRaWQkjWSiqrm/CaVxicDvPuP3wvHof5
+      1e3dYqzrAXRGG81VKjsPvB6AydNHGPGHOXX6JL3d7Tx96Ay+SgOpbBGXy0UqnbruRl8JqiZh
+      MuiQE/PYW26ltaJENAfh2RE6Dj6ArZAkkk7y5ofegc0AOoOZltZWCpk09RUSj/18gK6Wuhv9
+      MdZwy237ePIb/8KO/ltJzI3SuPc+quQMkXSJd/z+e0iHl9hz+0EefP1BGtt7+LUDu0hkZQyW
+      KjKRAIupAg7j6q2gaSpNnXvYWW/npeNDvOuP/iO55QC/9vZ3k47MUdJb+a0H7qL3jvsgE2N8
+      ao6+di/L8deeur6V0P/5n//5n7/8pFwq4K5vocKiZ2o2yO88/DAVuiJLiRx37G4nJRswW+3E
+      F6exOL10d7beANMvBwmv2863vvNdLN4u0jMnSZtq6W+tw9uxh+FDT2Ktb6e1thpf6w6MQCzo
+      58TAMK27+jmwdyenhv3cfWDPjf4gF1BLrGgVqKUst+/diaNhF7PHfoq+ZgftdR6qGxvIpdPU
+      V5kZmIlQ53FS7arEWulGMlhosmbIV3bQ2VRDLpPG4apF0lQq7Ra6+3r44Xe/S/ctB3nxpz+k
+      ZdctuCtt1Ne4UYwVmFBp9joZmQ2xe/ceKqyvkNC1RRFxgEvg8DM/wtt9B+0+94025aqgKSUe
+      f+xxHvzN/4DNuD3nQ4QABNuaDWW/MDvJiZMniSRWNv3FeDwOQCQcuTaWXSM0rUginkEtZYm+
+      it+qqQrx5Gsf42iqysToEBOz81dq5iUzPz1JTtFIBgMkixpz84FNrw3Mbf7admPDvNtwdIW9
+      u3s4fOQkLS2NeKssTIeSVLp95JNLtLa145+dxeVyMTk+gaTkmPQHaW7vQs6uYDOWyGtm5ubm
+      ad+5i8XpMSRLFf09XetSmK83mprBP5uit9PAlF9meWGCnGrGZdeRSKZx1jaxEgmQzSv09O8h
+      tZIlMDVKoajS1dvHxPBZnLVNSPkEqaKOphoHM/NhdvX3I6UWiRfMdDc6iS8vMD4TpLWtgZnp
+      OWp9zaiZKKmSDru+SCovsW9fP/qrsupFI7g4zXJOj09KgLORaDRCo8/HjH8Bq07D4LDjn5qh
+      oW0n0WgUSYMGXx3+xSUysQglvZ16l5nAUoze/j3Yt8l6hA17gGwqyomTp7BVOolGoyi5JCvY
+      mZscJhZPIZ2/5sQJFpZjzASWuO22/cxNjxKNRlmJh0ln85RkhXximclAiNmxcQpbYo2rxvTY
+      ECdPD6Kiks8VmJ6ZIpbOsW/ffuLL88gY2Ld7J7PT00TiCRSdgZ6Oes4cO0JoRWNsbJR8MY+q
+      KhSLRWRVBk3DUdOE05jlxKlBJvwL3HbbrSz7F9h96wHCi34WFsP097QyeHacyKKfSPrqzLnn
+      ogECMZj3T645L0l6ouFlFiNRtHwWJI2J6dVCBtFoFFWRCS7MMjoxy9z4GIl8EVXZXhUpNhSA
+      0WhCrzdQKpVQChnOjExhNlkwlBJU1TYDUOXxsn//flobvbgqLRw9eowKt49sKsr47CJGkxWr
+      SSKVVanzVNLc3sbWGGfp2Nm3m1v27cGkl4nHM1gsFtRilhMnjmGp8BAPBzlxapA6XwNGgwGT
+      0YSk01Pja6HCpNHe3o7dZiOTjKAZrei1EtFEmmIuTWKlgARUOx0cO3YCu8vByaNHMdiq8FTX
+      YNCbaWr2Ul3fhNN6dVKdpxeTPPTr99Puq0YxGNFJYDQaQZJw241gqSAWiyLp9JhMJoxGI0ZJ
+      4fTAWXTmKnzeahrb2nDarKAUiCc3DqbdjLzmQbCqFDj0i+Pc9fq7bsrF2meGhtjd2wvA4PAg
+      fT19N9giwfVAzAIJtjVbwikRCG4UQgCCbY0QgGBbIwQg2NZccwGIMbZgK3PNBXBxiXGBYKsh
+      XCDBtkYIQLCtuWQBZDIZxsfHSSaTLC0tMTU1haIozM7Osry8TLFYZHx8nGx2+4TTBb+6XHIk
+      OJPJYDQaGR5e3T3F4/GQy+WwWq3E43H0ej0dHR1MTEzQ19eHoijo9fprYrxAcKVclgs0ODhI
+      V1cXqqquZhWqKlarFb1ej6IomEyrS+NUVRWDYMGW5pIFMDU1hc1mI51Or1Y/1unweDzMz88j
+      SRJ1dXUMDg7idDrR6XQX9g4QCLYg1zwZTrhAgq2MeDwLtjVCAIJtjRCAYFsjBCDY1ggBCLY1
+      lywARVFYWFigWCxSKBQIBoPleEAmk0FVVYLBILIsv3pjAsEN5pKnQaPRKAaDgdnZWSRJYseO
+      HaiqSjgcJpvNYrVacbvdhMNhenp6xDSoYEtzyT1AZWUlMzMzNDQ0kEgk8Pv9zM3N4fF4MJlM
+      5PN5qqury1FgEQkWbGUuufzX4OAgDocDnU6H0+nEYDDgcDgIBAJIkoTL5WJ8fByLxYJOpxML
+      YgRbmkt2gWRZRpZl9Ho9er0eWZYxGo3IslxOfSiVShiNRiRJEi6QYEsjUiEE2xoxDSrY1ggB
+      CLY1QgCCbY0QgGBbIwQg2NZcchwgHA4TjUaxWq00NDTw4osvcscddzA8PIzZbKa6uppgMIjH
+      48Hn810LmwWCq8Yl9wDV1dW43W6KxSIzMzPYbDYikQgNDQ0oisLi4iJ9fX3EYjFUVRWBMMGW
+      5pIFsLi4SCaTobW1lUgkQiQSIZfLUSwW0TStHBwDkCQJ6arsgSUQXBsuORAWCATI5/M4nU5q
+      a2sJh8NUV1czNTWF3W7H5XIxMzNDU1MTDodDBMIEWxoRCRZsa8QskGBbIwQg2NYIAQi2NUIA
+      gm2NEIBgW3PJkeBYLMby8jIul4t8Pl+OCfj9fqxWKx6PB7/fj8/nw+VyXQubBYKrxmWtCW5u
+      bi5Hf202GzMzMzidTtLpNDMzM3R3d7OwsCCiwIItzyULIJVKMTU1xa5du5iZmUGv1+PxeNDp
+      dOuivpqmCREItjSbukCqqiJJEpqmrUlpCIfDmEwmIpEIyWQSTdNwuVxlF8jtdjM8PExdXZ1Y
+      FC/Y8mwYCVZVlaeffpqWlhYmJia4/fbbqampuaw3EJFgwVZmwx6gUCgwPj5OOBymrq4Ot9t9
+      ve0SCK4LG44BrFYrb3vb21AUhVgsJja8E9y0bDoGiMVitLS00NXVhdVqvZ42CQTXjU1ngRob
+      G0kkEpw8eZJisXg9bRIIrhubCiAYDLK4uMj09LRwgQQ3LZsKwOl0liO9dru9fF5VVZLJJLIs
+      UywWWVlZQdM0MpkMhUIBTdNIpVKiKK7gV4JNxwCFQoGqqioqKirW1PqPxWIUi0UCgQCyLGMy
+      mXC73UQiEWRZprKyEoPBwOLiIrt27bouH0IguFw27QGKxSIGg4Hq6uo18/gul4t4PE5NTQ0W
+      i4XGxsZy7o/ZbGZlZYXm5mZkWRbl0QVbnk0FkEqlaG5upr29HaPRWD4/MjJCZWUlFRUVFItF
+      FhcXaWlpYWlpiVKpREVFBfPz85hMJrFRtmDLs6kL5PV6OXr0KIlEAo/HUxZBa2sruVwOTdPo
+      7u6mUChQUVGBw+HAaDRiMplIJpM0NDRctw8hEFwumwrAZDKh1+txOp3IslzOCbLb7WsGxSaT
+      CQCHw1E+53Q6r6HJAsHVY1P/xGQyoaoqi4uLPPbYY6RSqetpl0BwXdi0B9DpdDgcDgwGA3fc
+      cceaJ7xAcLOwqQAGBwcJhUIYjUZUVRUZnYKbkg0FoGkaXV1duFwuxsbGsNls19sugeC6sKEA
+      8vk8jz32GDqdjve9731YLJbya+dXeel0uvI8v8FgQFGU8sKZ82sARF1QwVZnQwGk02lKpRIG
+      g4GnnnqKBx98sJwRmkwmGRsb47bbbmNwcBBJkvB6vSwsLKDX63G5XKTTaSwWC62trdf1wwgE
+      l8qGAvB4PDz88MPAaoXniwNhTqezPM1ZKpVQVZVEIkFTUxOhUIhoNMru3bsZGhoq9xBi/CDY
+      qmwoAL1ej81mw2q1ks1m16zrVRSlnAin0+nwer0kk8lygpzZbCaVSpWjwGJNsGArs+Ga4Fwu
+      x2c/+1l8Ph/hcJj3ve995WWRiUSCcDiM0+lEkiRyuRw+n4/l5WWsVisOh4OFhQW8Xi9ms1ms
+      CRZsaTYUgKIoDA4OYjQaqaqqor6+/rJzeoQABFuZTV2gXC7HyZMnqampwel0rkl/EAhuFjZ9
+      rFssFgqFgkhnFtzUbCqA9vZ2PB5POctTILgZ2VQAp06dwmg0MjAwQDwev542CQTXjU0FsG/f
+      PkqlEm1tbSK9WXDTsqEAisUi3/zmN5FlmWQySaFQKL9WKBSYmpoCIBKJMDExQalUYnJyksXF
+      RbLZLKOjoyJ9WrAlKRQKPP3007z44osEg8GNBZBIJNDpdIyMjKwrjKUoCrlcDlVVmZ6exm63
+      E4/HsVqtRKNRpqenaWtrIxAIiCCYYMtRLBbL1cwXFhY2FkBVVRW7d+/mLW95C3q9HkVRyq/Z
+      bDaMRmP55tY0jUAgUF4DrKpqedAsyqMLtiJHjx5lYmICj8ezcSBsfHwcm81GfX39uiBWLBZj
+      dHSU1tZWMpkM+XyexsZGAoEAFosFt9tNMBikpqYGr9crAmGCLUU2m2Vubo6VlZXVjOWNBJDP
+      55mYmCAYDGK322lvb6euru6y0puFAARbmVfcKV7TNLLZLJOTk3R2dl7WwhghAMFWZtMlkZlM
+      hp/+9Kd4PB4OHjxYrv4gENxMbBoHOHHiBLA6YBCBMMHNyqYCuPXWWwHo7++/7O2RBIKtzqYC
+      GB8fJxKJMDAwwD/8wz+Qz+evp10CwXVhUwEoikJVVRUWiwWr1VqO7KqqSjgcBlYHyUtLS+X/
+      z68KCwQCYlMNwQ1H0zTkokypUNo0HrXpILivr4/p6WkaGhq46667qK6uBmBlZYW5uTlqamqI
+      RqMMDg5isVjIZDKEQiHMZjNer5eJiQl6e3uvzScTCF4FuSRz7MljDB0eQlM1Om/t5M6334nJ
+      snYyZ9Me4MiRIywtLRGJRMpRXljdKd5ut6OqKrOzs1RUVJBMJnE6nRiNRorFIlVVVWiaJsqj
+      C64Kfr+/vEvRqVOnyveUpmnlyZqL0TSNUz87xeHHD5MIJUiGkxz/8XFe/N6L63qCTXuA9vZ2
+      HA4Hp06dwmw2l88nEgkikQhOpxOfz8fMzAwVFRUEAgH0ej1ut5vR0VHsdrtYFC+4KiwsLGCx
+      WHj++ecJBoPU19dz9uxZmpubOXPmDAsLC+zevZvh4WGcTie33347o0dG17UzcXyCu3/rbgym
+      C7f9K+4QMzo6ik6n46mnnuKhhx5Cr9dTUVHBgQMH0Ol0GAwGvF4vOp2OyspKdDodkiQhyzIG
+      w6ZNCwSXTCgUoqOjA7vdztLSEiaTiZmZGVpbW6mtreXs2bPcc889HDlyBACdfr1zI+kkeFky
+      w6Yu0OLiIs3Nzeh0OsLhcHngq9frMZlM5Rv8vGtkMBjKAjAajaIqnOCq4fF4aGxsZGpqimQy
+      icFgQFVVampqqK6upqKigv7+fn75y19SU1ODJEnsfv1uDHod9dVVdDTV0lDrpO/OHvSGC1kJ
+      mqZtngrh9/s5ffo0uVyO3bt309XVdVlPdZEKIbgRqIrKL//lZ2QXY0iShKZp1O5sZPdv3bXa
+      EwArkdTGPUA2m+WrX/0q8/PzzM3N0dDQIFwawa8MclFmcWCaUnyl7IlIkkQ8EEYplsrXJeYj
+      G48BrFYrb3nLW2hoaKC+vl4sihdcU0ZHR2lpaUFVVebm5ti5c+e6axKJBGazec3irI3QVI3h
+      H77E8uj8utcsFVZ0F7lA1irbxgKQJAmXy8W3vvUt9u/fz8GDB0WJdME1Y2hoiGKxSLFYZHJy
+      ElmWCQaD7NmzhxMnTuBwOEgmk5RKJQ4cOMDIyAh9fX0MDAxgMBg4cOAAJ06coLGxkcZaH+GJ
+      xXXvYamy03X/vrIAFHm1mvmmfk1zczMHDhzA4XCsyQTVNI1isYjZbKZYLJLP56moqCCbzWI0
+      GjEajaRSKSoqKsQOkYLXhMfjIRZb9dWrqqpYXFzk1ltv5ejRo9TU1JDJZKivr6e2tpZ8Po+m
+      aZw9exaz2YzD4SAcDqOqKmfOnKH5TY2rPv/F7bd76X/7nejPTX/KRZnh7x8hNhvaXABDQ0Ok
+      02lGRkZoa2vD5XIBq+XRR0dHOXjwIKFQiFwuRzQaJZPJlDfK1uv1LC0tbdiVCQQv5/z+E+f3
+      pdM0jZdeeonm5mY0TUNRFNxuN0NDQ1gsFkwmE5IkYTabMZvNRKNRYNV1NzksNO3vwH90DDQw
+      Wk203tWLwXzBjY9NBYnNhIBXiAPU1tZy8uRJVFVd43c5nU5cLlfZTYpEIrhcLurr6wmFQqTT
+      aVEeXXBJ3HbbbQDl2RqgfN+cP5YkiYaGBvR6PaqqrvEuzseezm/K0n7vbqq7GsgnMzgba7BU
+      rXXf5cKFgfCGAlhZWeGFF14or56XZbn8Wi6XI5VKkUqlOHPmDDt37sRoNLKwsLBmo2yj0Sgi
+      wYLXxMtv5ovPXRxPOj8Zs5FrffFEjU6nw9VUA00bp/G7W+swOSwUV/IbxwGKxSLPPPMMpVIJ
+      t9vNbbfdVh4HZLNZstksZrMZWZbLWaP5fH7NRtnnXSERBxBsNTRNIxdfIXhmdvPy6KdOnWJx
+      cZF8Ps9b3/rWy64OLQQg2MpsOE2zsrLC4cOHAcT+wIKbmg17gI389svN7RE9gGArs2EPIEkS
+      fr+fH/3oRwSDwettk0BwXXjFZLhcLsdzzz3HSy+9RGNjI+9+97tfNQy9EaIHEFwuqqISGZ5n
+      ZSGOucpG7Z4dGG1XpzxPPp3jxGOHNxZAoVBgZGSEfD5PW1sbmqaV1wdfKkIANx9PPPEEnZ2d
+      RCIRDhw4QDgcpqamBlVVKRQKOBwOZFkmn8/z6KOP8v73v59//ud/5t577y1vpKiqKiaTac0u
+      pJqmYTQayefz1NTUEBmaJ3Rqtvy+jnoXO97Y+4ruuKqozL40RnDIj9FqpuOePtzNa6dDNU3j
+      +LcP4T8xuXEcIBaLlfP/z5w5w5133lm++VdWVpienqa/v5+ZmRlyuRydnZ1MTExgtVpxu93M
+      z89TV1cnyqncpFRVVbGwsIAsy5w+fRq9Xs/o6CgGg4HZ2Vn6+/uprKykuroah8NBIBBAp9MR
+      DAbJ5XLlZbPLy8vs2bOHaDRKNBqlu7ubM2fOYLPZ6O3tJbO4th5VNpJCKcproroXo2kasy+N
+      MvTk8fK5mH+Z1/3xW7B7Ki5cp6jEAqv394ZjgPr6elpaWpibmyMaja6pDm2xWDCbzaiqSi6X
+      w+v1MjQ0RE1NDblcjkAgQE9PD6FQqBzWFtxcSJLErl27GBkZIZFIMD8/j91uJ5VK0dXVxenT
+      p2loaACgra2N5557jvb2drLZLH6/H51Oh9VqJZfLodfrKZVKVFZW4nK5MJvNuN1uCoUCZufa
+      qXeTw4Le+MrexMKZ2TXHpVyB5YmFtfbrdWVBbNgDpFIpRkdH8Xq9tLe3r1kT/PJ1AZqmrYn4
+      Xtw9iVVhNye7du3C4/Fw//3309bWxunTp2ltbaW5ubn85LdarRgMBrq7u6mrqytnFXg8Hmw2
+      Gw6Hg5aWFkqlEr29vSwuLhIKhejs7CSZTNLY2IhSKyPnCmRCSUwOC76DnfAq95TRsr53ML6s
+      EoQkSfQ/eCsrkdTGY4BYLMZzzz2H2+0mGo1y7733ljfKjsVizMzM4PP5KBaLZDwuHFUAAA5w
+      SURBVLPZsgtks9lwu934/X4aGhpwuVxiDCC4IjRNQ5NVJL0OpPUPVU3VCI/Ok5yPYPNUYnCY
+      OfHICyil1fQdZ2M1t//hfetEoGnaqju10ZuazWaOHz9ObW0tiqKsybNwu91lMVxMd3d3+ee+
+      vr7L/8QCwUVIkoS0idujaRoLJ6bwHx4pn6vZ1cDdf/wWlscXMNnM1Pc2YzAb13kokiRhMBs3
+      nwYNBoPlQlft7e2XXR1a9ACCa4WmaZz61+fIxVbK5/RGPbe+734MltWbvpjOs3zaTymTp7LJ
+      g6e7YbU3Ocem6dATExMkk0mamprEQFZwQ9BUjVwwhZwuYK6xY3Lb1rlA68aZ0kWlT1SNhUNj
+      5OMZAPKxDDqjAffO+vLlmy7Zqq2tZW5ujtHRUVHnU/CqDA8Pl2f9zv9//l+hUCCRSJTXh0Qi
+      ERRFWXPdy38XIOOPkxoKkQ0kiJ9cpBTPrXvf2p6mNceedm955VcpX6SQWvs7mVByzfGmPUBT
+      UxMejwe73X7ZmaCC7cP5VVkDAwOEQiGcTieqqmKz2bBYLOTzecbHx9m5cyf5fJ7Ozs7yZuzn
+      Xe09e/YQCARIp9M88MADFCKZC2+gaRRiWUzuC4tbJEmifm8reqOBZCCCvaYC797Wcq9gMBsx
+      2kwU0xcqm1vcdpSiTCGdw+SwbC6AY8eOsXPnTkZGRohEItTW1l7t70xwExKPx7n33nt59tln
+      sdlslEql8iRKa2srwWAQh8PB/Pw8iqIQjUapqamhq6sLv99PIpEgFouhaRomp5VSPLeasyNJ
+      GCvXZyLo9Dq8u3fg3b1jg9f0+O7oZOn4DHKugMPnxlBh5vg//Yx8KofZYdnYBdI0jVtvvZXh
+      4WHsdnu5MvTLr1lcXGRiYgJZlpmammJpaYl8Ps/o6CgrKysbtCy4WbHb7Rw+fJi2tjaef/55
+      +vv7MRqNLC8v43a78Xg8lEolqqur8fl8eDwe9Ho9LS0tNDY2YrfbaWhowGq10tLSgiRJONrc
+      2FtcyIpCoVAgORNGzl2COy6BraaS1jfvpu2t+8jlcwx+75dk4ytoqko+ld14Figej/OZz3yG
+      vXv3UlFRwf33379uXcD5Vfgul4t8Po/D4Siv7O/q6mJ8fJze3l6xJlhwRaRmo8TOXIjk2huq
+      qL6l+ZKDrHPHJ5h8ZmDNOUmSNu4BnE4nH//4x6mvrycYDG5a4lzTNFKpFKqqYjabxUbZgk3R
+      VJWVxTiJ6WXkXPE13xdyprDmuJgqrLtG0zTy0QzR0/PEh4MoBXndNcn5yIbtb1oa8fHHHycY
+      DLJ///5N06DPp0XU1taysLCAXq+nvr6ewcFB3G53uViuYGszMjJCMBikUCjw3HPPEY/HKZVK
+      666LRCIbPgzD4fCGN3SpVCIej6NpGuGBORZ+MU7o2AyBZ4dR8ufa10DJy+SX0pSS+XXt2LxV
+      5ZlNCZBX8pTSa7frkrNFwsf8ZOYTpKejRE/Nr2unwutaZ5+zqXrjQbDBYKC/v7/surw8Ggyr
+      K+/7+/vLxx6Pp/yzyAL91WJpaYlQKITX62V8fByfz0cqlWJ4eJje3l6Gh4dpaGhAp9MRi8WY
+      nZ2lp6enXBUkk8kwPz9POBymoaEBv98PwC233EI6nabSUUEqEC2/X2llNb+nqqUGOV8ifmIB
+      tSCDBJW7arHUV5QfnEa7CUmnQ1POCU8DOVfCVHnhoVxM5NDkC8IsJLKr6RMXRZA9bV5mD42g
+      nkvs1BsMGMymzVMh7rrrrqv09Qq2OkajEUVRWFpaKt/8dXV1qKparvaRyWRQFIWGhgZKpRKy
+      LCNJEtlsllgshsVi4e677+bIkSPY7Xa6urrKm6ZIOh16s+HCUx8wnMvNKYQzqzc/gAa5xRSW
+      +gupyzqzAWtdBdnF1fl7g92ExfWyLNEqK5L+gkhMlZY10V4Ac6UNW5WDwspqXECSJCrqnJsH
+      wgTbh8rKSlpbW9Hr9Xg8HhwOB3q9HovFUi6Bc74Epk6nw2g0ksvlyinNVVVV5HI5nn/+eRoa
+      GggEAgwMDNDS0oLD4UCn11G3vwWz04beYsTd48NWWwmA3rL2Gawzrz2WJAnP3iY8+5pw9fmo
+      u6sdybj2tjXYTVTvb8LqrcTR7MKzr7FcAr18jdlI55v2Yq+uxGg1UbOrkYZbOzbPBbpaiFyg
+      7cHQ0BAdHR2YTCYGBgbYu3fvums0VUXTVndqOe/iaKrGynSUQmgFvc1Ixa5aDNZrV41cVVQ0
+      VUVnWK0iJwQguOFomgYaG6Y7n3+9UChgMBgoFArlHYrOb84Iq/dZNpuloqJi3e+/EmLXC8EN
+      R7o4gW0DhoaGWF5eJpVK0drais/nQ6fTcfbsWfbu3cvc3Bw7duzg0KFD7Nq1i6amJkZHR+no
+      6CAajZJOp5EkicbGRiKRCJqmlYNtVzQGOL8IWtM0SqUSiqKUy6eL+X/B1WJ+fp43vOENeL1e
+      YrEYTz/9dLlebTqdZnJyksHBQWRZZnp6msOHD+N0OnnhhRc4fvw48/Orm2UMDAyQSCR45pln
+      yOdXp1IvuwfQNI3R0VFsNhsej4fJyclyxehcLofBYKCjo+MqfHzBdqeiogK/3084HMbn81Eq
+      lUgmV2eFzpw5w44dO0ilUni9XmRZLj+UAVwuFw6Hg5qaGpaWlggEAuWVirBJZbjXgqIoHDp0
+      qLyQubq6mlAoRKlUKpdH7+np2TCGIBBomoamaKBqSMZXDpgqisLY2Bi1tbWrewCYTMTj8XKB
+      5lgsRm1tbXltusViYXx8nPb2dorFInq9HrPZTC6XIxKJYDAYyqXWL1sAmqYxMDBAbW1teevK
+      bDZbLo0SDofp7u4Wg2DBejQopQpkZxNoioa5xoaloWLd1OX14IpmgXK5HMlkkrq6OqLRKBaL
+      BavVSigUora2FoPBIAQgWIemaqyMRZHT5zI7JYmK3moMtuvvKVzRLJDVai3nCV2cMu3z+a7M
+      KsHNzfnEnouOb1TGmIgEC647kiRhbahAbzUgGXVY6h3orDdmRl4EwgQ3BE1bHQBrGkh66YZl
+      DYtAmOCGIEkS6KUb5vqcR7hAgismn88zOzvL5OQkgUCAqampDdcTjI2NoaoqpVKJiYkJFEVh
+      fHy8XIj5YjRNW3P+fDWJq43oAQRXjMFgYGJiorxR+vnZwWAwSEdHB2NjY3R1dfHUU0+Va4FO
+      T09jsVgoFAr4/X7OnDmDqqpUVVURiUTo6OggnU5z5MgRAA4cOFAu1jY1NcV9992HzWZ7Fcte
+      nSvqAUqlEs8++yzFYpHTp08zPDxMKBTi7Nmz5fCz4ObHYDCUiySfT1YbGxvDaDSSTCax2+2k
+      02l27dpFd3d3OWPg9OnTtLe3s7Kygqqq3HvvvWSzWQ4cOEChUCCTyVBRUcG+fftIJBJkMhkW
+      FxdJpVLlSPCVctkC0DSNmZkZqqqqiEajNDY2omkaoVCIvr6+NYWQBDc/9fX1VFdX43Q68fl8
+      3HLLLej1+nI8SK/X4/V6GRkZQdM0urq6ymXSz1eK0Ov1VFVVcfjwYRRFobq6mpqaGqxWKxUV
+      FXg8HgwGw2Vv1rIRlz0LJMsyJ06cIB6PlzfLjsfj6HQ6Ojo6mJiYEFUhBJfM6Ogofr+f22+/
+      naqqqmv+flc8DRqNRnG73czOzmK326mqqmJ2drZc60VMgwq2MiIOINjWiGlQwbZGCECwrREC
+      EGxrhAAE2xohAMG25ooCYeFwmOnpaRRFIRAIEIlEKBaLTE5Oksut381DINhqXFEPYDabMZlM
+      jI+Pl/cLmJycxOfzMTU1dbVsFAiuGZctAEmSSKfTpNNpqqqqyuX0ZFkurxITqRCCrc5lC0BV
+      Vaanp9Hr9djtdgKBALBaKn1oaIiqqip0Oh06nRhmCLYuV1QV4lUblyQRCRZsaS57PYDY+EJw
+      MyD8E8G25qoLoFAoMD4+TjabvdpNCwRXnasugKmpKZqbm5menr7aTQsEV52rLoDzO0YKBL8K
+      XHUB1NTUMDg4WN64QCDYylyTBTHnmxTToIKtzjUpi3J+ivRqRoI1TbtqU69Xqy3Rzq9+O9e0
+      LtD5eu1XowdQVXV1U7Mr/CLO715/pRHqrdYOXL3lp1utnav1t9+onWu+Jlgg2MqIQJhgW3Nd
+      SiMuLS0RCoWw2Wx0dna+pt/RNI0TJ05QWVlJTU0NMzMzGI1GHA4HKysrOJ1OmpqaXrENVVUZ
+      HBykuroaSZIIh8NYrVZkWaZYLOLz+cpJfPv27dvUDdE0jampKTRNw+fzMTg4SGNjI8VikXQ6
+      jcvlIhaLoSgK3d3d5WzYlyPLMlNTU6TTaerr6wmHw1gsFnQ6HdlsFq/Xy+LiIpqmsXv37k23
+      ljpvTzqdpqGhgampKRobG1FVlVQqRWVlJalUilKpRFdXFw6HY9N25ufnSSQSuFwulpeXAWho
+      aCAYDGK1WpEkiVwuR319PbW1tZt+16FQiGg0itVqJRqNUlVVRU1NDdPT0xgMBpxOJ/F4HKfT
+      yY4dOzZtB+D06dNUVlaSz+cpFAo0NTXh9/sBaGpqIhgMYjab2bVr1yu2Mz09TSqVwm63UyqV
+      8Pl8+P1+ZFmmpaUFv99/fXqAaDRKf39/eWe+14rVaqVQKBAKhdi5cyc6nY50Ok1fX99rKo2n
+      0+loa2tD0zQikUjZBkVR6OnpYW5uDpfLRXV1NZlMZtN2JEmiubkZvV6PpmnlHdIzmQx9fX3E
+      YjEsFgstLS3EYrFN27l4b6pkMklPT09ZjL29vSwuLlJVVYXX6yWdTr+qPZqmYTQasdlsZLPZ
+      Nd+NTqejq6trw8KzF7fjdDpZWVkpV2Jzu93Mzc3R09NDsVikWCzS09Pzip8LwOl0ks1mMZlM
+      5b9bJBKhra2tXDStv7+fVCr1iu3EYjFsNlt5BrG7u5uZmRnq6upwuVxl2zYqvnsx2WwWRVEw
+      mUyYTCYAMpkMFouFHTt2MDU1RWtrK/8/p9e9yu8anAQAAAAASUVORK5CYII=
+    </thumbnail>
+  </thumbnails>
+  <external>
+    <shapes>
+      <shape name='Bug Tracking/bug.png'>
+        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
+      </shape>
+      <shape name='Bug Tracking/light.png'>
+        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
+      </shape>
+      <shape name='Bug Tracking/mail.png'>
+        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAABYlAAAWJQFJUiTw
+        AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAh9pVFh0WE1MOmNvbS5h
+        ZG9iZS54bXAAAQBVVEYtOABYTUw6Y29tLmFkb2JlLnhtcAAokX1T0W6bMBT9Fct92aQFcwGb
+        gMoqxwatD9mqNFL3SsBtUAtG4Cw0v9aHfdJ+YSYLUTVVAR587XPuuRefe30ztHnxrAzaqKeq
+        SfCft98YVWWCH+jSXbZCbatvh07dH76vi8NzEZX45iu6HuKhbmtlcjTUL00fDwnOS71RsV2P
+        2wSjI8Q8J5iPB+jn8g4J3SlEHX9WuACIMQcCyhh8QZ4LHnHtx2YQxJTFXohOD7ZqXfkYr2R2
+        0rJRgrfGtDEh+/3e2fuO7p4IRFE05vC8mUXM+tfG5MOs6a+mDFL1RVe1ptINGuN8o3cmwXhq
+        oW6Xy3PipneODTmFrsmQtwQcl9Q1mdC9WanHy+h+/doqslK93nWFsvCrd1KXqSPQVhP/6Cp7
+        KfmL1MWuVo25lQm2J05ZlXHAmQRJGbevlADzxYIJDzJK09SnLp9yfMRlYRhxEL5kAQNIfS4i
+        kHyx4NL1PcHFxL1tepM3hZq41ZHLXBr44iI3Fp3Kje7WWr9MDrjbaqP7rW6RuGfo00PVlHrf
+        fx6v51Sp6qpfqsw6XaPj/42rD/SDIKQiy6x1JEt9gIh5KQ/nEHpAbWT1/3HLd33vdpaYBSKj
+        gXBBhnOZAixCCmnG5ZyDlwoIMLGVkP+cMm1Z+43Ls+9tcJ4c1dhx6exc/AUr1AWVJQ/oNAAA
+        AetJREFUWIXt2D9IlHEYB/DPZSk4l4uDEA05mFBzDXqbe1CQWyINEU0JQbWoo0NCuTZVq07p
+        LeHQ4GIpuLi7NEuB1/A+L9r1nve+vnfa8H7h4O737/nwvsfzHldrNpv+51y6aECnVMCyqYBl
+        UwHLpgKWzeXWgYm5tV+4cgEW+N1YmOo/OZB1Be9g83w8f2UTt1sHs4D9uIsZ/OwxStSYiZoD
+        rZNZwG9YwkeM4gN68YuiGWePRq2lqN0R2Ien2MU9TKOOvS7i9lBvLExNR43dqNmXB5hmGJ+x
+        in2M4zUOS8AO44xx7E/Mra1GjeF2G/K0mSns4BnmcQsbZ8BtxN75OGsnzj41efvgIBaxhSHJ
+        LX+Egxx7D2JtPfZuxVmDeQoXbdRj+IoVrOFmvD/KWHsUc6OxdiX2jhUpeJYnSQ2P8VzS0Gcl
+        LWL7xJrtGJuNz29iT61osX+eJDmzLGkNP/AdTyQN/n7Mf8J1fMENye29igfnAVzGO8mXfgiT
+        kiu2GHNNvMQLx413PZBNPOwlsBWXZgCv4pWVkRNICiCLANvh8uZMyLzAsrg0hZF5gN3CpSmE
+        7ATsNi5NbuRpwBTXwLWu0Y6TC9kO+Bbv9Q6XpiMyC3heuDQjkq/QZNZkrfp3q2QqYNlUwLKp
+        gGVTAcvmD5YpbPKOzTAfAAAAAElFTkSuQmCC
+      </shape>
+    </shapes>
+  </external>
+</workbook>
